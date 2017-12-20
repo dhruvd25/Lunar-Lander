@@ -1,0 +1,93 @@
+import sys
+altitude=1000
+velocity=0
+fuel=1000
+print("Welcome to Lunar Lander")
+print("Your starting altitude is",altitude,"meters")
+print("Your initial speed is",velocity,"m/s")
+print("Fuel left in your rocket is",fuel,"liters","\n")
+fuel_burn=float (input("enter amount of fuel to burn "))
+if(fuel_burn<=1000)&(fuel_burn>0):
+        v=1.6-(fuel_burn*0.15)
+        a=1000-v
+        if(a>1000):
+            print("You are burning too much fuel and drifting into deep space!")
+            print("your distance from moon is",a)
+            print("Your current speed is",v,"m/s","\n")
+        elif(a<1000):
+            print("Distance to moon's surface",a)
+            print("Your current speed is",v,"m/s")
+        t=1
+elif(fuel_burn<=0):
+        fuel_burn=0
+        v=1.6
+        a=1000-v
+        print("Distance to moon's surface",a)
+        print("Your current speed is",v,"m/s")
+        t=1
+x=1
+fuel_left=1000-fuel_burn
+print("Fuel remaining",fuel_left,"liters","\n")
+while(x==1):
+    if(fuel_left>0):
+            fuel_burn=float (input("enter amount of fuel to burn "))
+            if(fuel_burn<=1000)&(fuel_burn>0)&(fuel_left>0):
+                    t=t+1
+                    v=abs(v)+1.6-(fuel_burn*0.15)
+                    a=a-v
+                    fuel_left=fuel_left-fuel_burn
+                    if(a>1000):
+                            print("You are burning too much fuel and drifting into deep space!")
+                            print("Fuel left",fuel_left,"liters")
+                            print("your distance from moon is",a)
+                            print("Your current speed is",v,"m/s","\n")
+                    elif(a>0)&(a<1000):
+                            print("Distance to moon's surface",a)
+                            print("Your current speed is",v,"m/s")
+                            print("Fuel remaining",fuel_left,"liters","\n")
+                    elif(a<=0)&(v<10):
+                            print("You have landed safely on moon")
+                            print("Time taken to land",t,"seconds")
+                            x=x+1
+                    elif(a<=0)&(v>10):
+                            print("Boom!")
+                            x=x+1  
+            elif(fuel_burn<=0)&(t>0)&(fuel_left>0):
+                    fuel_burn=0
+                    t=t+1
+                    v=v+1.6-(fuel_burn*0.15)
+                    a=a-v
+                    fuel_left=fuel_left-fuel_burn
+                    if(a>1000):
+                            print("You are burning too much fuel and drifting into deep space!")
+                            print("Fuel left",fuel_left,"liters")
+                            print("your distance from moon is",a)
+                            print("Your current speed is",v,"m/s","\n")
+                    elif(a>0)&(a<1000):
+                            print("Distance to moon's surface",a)
+                            print("Your current speed is",v,"m/s")
+                            print("Fuel remaining",fuel_left,"liters","\n")
+                            print("\n")
+                    elif(a<=0)&(v<10):
+                            print("You have landed safely on moon")
+                            print("Time taken to land",t,"seconds")
+                            x=x+1
+                    elif(a<=0)&(v>10):
+                            print("Boom!")
+                            x=x+1
+    elif(fuel_left==0)&(a>0):
+            print("Out of fuel")
+            print("Final  Distance to moon's surface",a)
+            print("Your current speed is",v,"m/s","\n")
+            x=x+1
+    while(x>1):
+        print("Press y/Y to play again")
+        print("Press n?N to exit","\n")
+        user_input=str (input("Do you want to play again "))
+        
+        if(user_input=='y') or (user_input=='Y'):
+                x=x-1
+        elif(user_input=='n') or (user_input=='N'):
+            sys.exit(0)
+        else:
+                print("Enter a vaid input ")
